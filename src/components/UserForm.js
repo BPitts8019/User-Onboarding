@@ -3,7 +3,7 @@ import {withFormik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 
-function UserForm ({errors, touched}) {
+function UserForm ({values, errors, touched}) {
    // useEffect(() => {
    //    if (errors && Object.keys(errors).length > 0) {
    //       console.log(errors);
@@ -23,7 +23,7 @@ function UserForm ({errors, touched}) {
          <Field type="password" name="password" className={isError("password")? "error" : ""} placeholder="Password" />
          <ErrorMessage name="password" className="error" component="p" />
          <label>
-            <Field type="checkbox" name="agreedTos" />
+            <Field type="checkbox" name="agreedTos" checked={values.agreedTos} />
             <span className={isError("agreedTos")? "error" : ""}>I agree with the Terms of Service</span>
          </label>
          <ErrorMessage name="agreedTos" className="error" component="p" />
@@ -47,7 +47,7 @@ export default withFormik({
          .required("Please enter your name."),
       email: yup
          .string()
-         .email("The email address entered is invalid. Try again")
+         .email("The email address entered is invalid.")
          .required("Please enter an email address."),
       password: yup
          .string()
