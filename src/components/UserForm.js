@@ -3,7 +3,7 @@ import {withFormik, Form, Field, ErrorMessage} from "formik";
 import * as yup from "yup";
 import axios from "axios";
 
-function UserForm ({errors}) {
+function UserForm ({errors, touched}) {
    // useEffect(() => {
    //    if (errors && Object.keys(errors).length > 0) {
    //       console.log(errors);
@@ -11,20 +11,20 @@ function UserForm ({errors}) {
    // });
 
    function isError (field) {
-      return (errors[field])? true : false;
+      return (touched[field] && errors[field])? true : false;
    }
 
    return (
       <Form>
          <Field type="text" name="name" className={isError("name")? "error" : ""} placeholder="Name" />
          <ErrorMessage name="name" className="error" component="p" />
-         <Field type="email" name="email" className={isError("name")? "error" : ""} placeholder="Email" />
+         <Field type="email" name="email" className={isError("email")? "error" : ""} placeholder="Email" />
          <ErrorMessage name="email" className="error" component="p" />
-         <Field type="password" name="password" className={isError("name")? "error" : ""} placeholder="Password" />
+         <Field type="password" name="password" className={isError("password")? "error" : ""} placeholder="Password" />
          <ErrorMessage name="password" className="error" component="p" />
          <label>
-            <Field type="checkbox" name="agreedTos" className={isError("name")? "error" : ""} />
-            <span>I agree with the Terms of Service</span>
+            <Field type="checkbox" name="agreedTos" />
+            <span className={isError("agreedTos")? "error" : ""}>I agree with the Terms of Service</span>
          </label>
          <ErrorMessage name="agreedTos" className="error" component="p" />
          <button type="submit">Submit</button>
