@@ -11,7 +11,7 @@ form {
    text-align: left;
 }
 
-.error {
+p.error {
    margin: 0;
    position: absolute;
    color: #721c24;
